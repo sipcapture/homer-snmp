@@ -11,6 +11,15 @@ Modular component for [HOMER 5](http://github.com/sipcapture/homer)
 
 * Development Stage
 
+### OID 
+
+Sipcapture uses its reserved OID Root 1.3.6.1.4.1.37476.9000.25
+
+| OID                            | Value           | Source  |
+| ------------------------------ |:---------------:| -------:|
+| 1.3.6.1.4.1.37476.9000.25      | ROOT            |         |
+| 1.3.6.1.4.1.37476.9000.25.1.0  | Hostname        | OS      |
+
 
 ### Documentation
 
