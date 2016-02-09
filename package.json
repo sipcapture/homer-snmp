@@ -1,0 +1,16 @@
+{
+  "name": "homer-snmp",
+  "description": "HOMER SNMP Bridge",
+  "author": "lorenzo.mangani@gmail.com",
+  "dependencies": {
+    "snmpjs": "*",
+    "node-rest-client": "*"
+  },
+  "scripts": {
+    "start": "node hsnmp.js",
+    "forever": "forever start -o ./log/hepipe.log -e ./log/error.log -a --minUptime 1000 --spinSleepTime 3000 ./hsnmp.js",
+    "debug": "forever -l ./log/hepipe.log -o ./log/hepipe.log -e ./log/error.log --minUptime 1000 --spinSleepTime 3000 ./hsnmp.js",
+    "stop": "forever stopall",
+    "preinstall": "npm install -g forever"
+  }
+}
