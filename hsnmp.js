@@ -22,6 +22,10 @@ jar.add(homercookie);
 **********************/
 
 var _config_ = require("./config");
+if(process.argv.indexOf("-c") != -1){
+    _config_ = require(process.argv[process.argv.indexOf("-c") + 1]);
+}
+
 var apiUrl = _config_.apiUrl;
 var apiUser = _config_.apiUser;
 var apiPass = _config_.apiPass;
@@ -54,6 +58,15 @@ var getAuth = function(){
     });
 }
 
+var prepSNMP = function(prq,body){
+          try {
+		  sendSNMP(prq,JSON.parse(body).data[0].total);
+	  } catch(err) { 
+		  sendSNMP(prq,'null');
+	  }
+	  if (debug) console.log(body);
+}
+
 var sendSNMP = function(prq,data,type){
     if (!data) return;
     if (!type) {
@@ -78,40 +91,40 @@ var sendSNMP = function(prq,data,type){
 /* SYSTEM */
 
 agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.1', handler: function (prq) {
-    var nodename = os.hostname();
+    var param = os.hostname();
     var val = snmp.data.createData({ type: 'OctetString',
-        value: nodename });
+        value: param });
 
     snmp.provider.readOnlyScalar(prq, val);
 } });
 
 agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.2', handler: function (prq) {
-    var nodename = '' + os.uptime();
+    var param = '' + os.uptime();
     var val = snmp.data.createData({ type: 'OctetString',
-        value: nodename });
+        value: param });
 
     snmp.provider.readOnlyScalar(prq, val);
 } });
 
 agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.3', handler: function (prq) {
-    var nodename = '' + os.loadavg();
+    var param = '' + os.loadavg();
     var val = snmp.data.createData({ type: 'OctetString',
-        value: nodename });
+        value: param });
 
     snmp.provider.readOnlyScalar(prq, val);
 } });
 
 agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.4', handler: function (prq) {
-    var nodename = '' + os.freemem();
+    var param = '' + os.freemem();
     var val = snmp.data.createData({ type: 'OctetString',
-        value: nodename });
+        value: param });
 
     snmp.provider.readOnlyScalar(prq, val);
 } });
 agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.5', handler: function (prq) {
-    var nodename = '' + os.totalmem();
+    var param = '' + os.totalmem();
     var val = snmp.data.createData({ type: 'OctetString',
-        value: nodename });
+        value: param });
 
     snmp.provider.readOnlyScalar(prq, val);
 } });
@@ -132,7 +145,8 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.5.1', handler: function (prq
 	  jar: jar
 	}, function(error, response, body) {
 	  if (debug) console.log(body);
-	  sendSNMP(prq,JSON.parse(body).data[0].total);
+	  prepSNMP(prq,body);
+	  // sendSNMP(prq,JSON.parse(body).data[0].total);
     });
 } });
 
@@ -148,7 +162,8 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.5.2', handler: function (prq
 	  jar: jar
 	}, function(error, response, body) {
 	  if (debug) console.log(body);
-	  sendSNMP(prq,JSON.parse(body).data[0].total);
+	  prepSNMP(prq,body);
+	  // sendSNMP(prq,JSON.parse(body).data[0].total);
     });
 } });
 
@@ -164,7 +179,8 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.5.3', handler: function (prq
 	  jar: jar
 	}, function(error, response, body) {
 	  if (debug) console.log(body);
-	  sendSNMP(prq,JSON.parse(body).data[0].total);
+	  prepSNMP(prq,body);
+	  // sendSNMP(prq,JSON.parse(body).data[0].total);
     });
 } });
 
@@ -180,7 +196,8 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.5.4', handler: function (prq
 	  jar: jar
 	}, function(error, response, body) {
 	  if (debug) console.log(body);
-	  sendSNMP(prq,JSON.parse(body).data[0].total);
+	  prepSNMP(prq,body);
+	  // sendSNMP(prq,JSON.parse(body).data[0].total);
     });
 } });
 
@@ -199,7 +216,8 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.15.1', handler: function (pr
 	  jar: jar
 	}, function(error, response, body) {
 	  if (debug) console.log(body);
-	  sendSNMP(prq,JSON.parse(body).data[0].total);
+	  prepSNMP(prq,body);
+	  // sendSNMP(prq,JSON.parse(body).data[0].total);
     });
 } });
 
@@ -215,7 +233,8 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.15.2', handler: function (pr
 	  jar: jar
 	}, function(error, response, body) {
 	  if (debug) console.log(body);
-	  sendSNMP(prq,JSON.parse(body).data[0].total);
+	  prepSNMP(prq,body);
+	  // sendSNMP(prq,JSON.parse(body).data[0].total);
     });
 } });
 
@@ -231,7 +250,8 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.15.3', handler: function (pr
 	  jar: jar
 	}, function(error, response, body) {
 	  if (debug) console.log(body);
-	  sendSNMP(prq,JSON.parse(body).data[0].total);
+	  prepSNMP(prq,body);
+	  // sendSNMP(prq,JSON.parse(body).data[0].total);
     });
 } });
 
@@ -247,9 +267,85 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.15.4', handler: function (pr
 	  jar: jar
 	}, function(error, response, body) {
 	  if (debug) console.log(body);
-	  sendSNMP(prq,JSON.parse(body).data[0].total);
+	  prepSNMP(prq,body);
+	  // sendSNMP(prq,JSON.parse(body).data[0].total);
     });
 } });
+
+
+
+/* SIPCAPTURE ALARMS 5min */
+
+agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.11.5.1', handler: function (prq) {
+
+    var now = Date.now();
+    var from = now - (5 * 60 * 1000);
+    request({
+	  uri: apiUrl+"statistic/alarm",
+	  headers: { "Content-Type": "application/json" },
+	  form: {"timestamp":{"from":from,"to":now},"param":{"filter":[],"total":true}}, 
+	  method: "POST",
+	  jar: jar
+	}, function(error, response, body) {
+	  prepSNMP(prq,body);
+
+    });
+} });
+
+/* SIPCAPTURE ALARMS 15min */
+
+agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.11.15.1', handler: function (prq) {
+
+    var now = Date.now();
+    var from = now - (15 * 60 * 1000);
+    request({
+	  uri: apiUrl+"statistic/alarm",
+	  headers: { "Content-Type": "application/json" },
+	  form: {"timestamp":{"from":from,"to":now},"param":{"filter":[],"total":true}}, 
+	  method: "POST",
+	  jar: jar
+	}, function(error, response, body) {
+	  prepSNMP(prq,body);
+
+    });
+} });
+
+/* SIPCAPTURE ALARMS 30min */
+
+agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.11.30.1', handler: function (prq) {
+
+    var now = Date.now();
+    var from = now - (30 * 60 * 1000);
+    request({
+	  uri: apiUrl+"statistic/alarm",
+	  headers: { "Content-Type": "application/json" },
+	  form: {"timestamp":{"from":from,"to":now},"param":{"filter":[],"total":true}}, 
+	  method: "POST",
+	  jar: jar
+	}, function(error, response, body) {
+	  prepSNMP(prq,body);
+
+    });
+} });
+
+/* SIPCAPTURE ALARMS 60m */
+
+agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.11.60.1', handler: function (prq) {
+
+    var now = Date.now();
+    var from = now - (60 * 60 * 1000);
+    request({
+	  uri: apiUrl+"statistic/alarm",
+	  headers: { "Content-Type": "application/json" },
+	  form: {"timestamp":{"from":from,"to":now},"param":{"filter":[],"total":true}}, 
+	  method: "POST",
+	  jar: jar
+	}, function(error, response, body) {
+	  prepSNMP(prq,body);
+
+    });
+} });
+
 
 
 /********************** 
