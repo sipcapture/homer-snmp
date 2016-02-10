@@ -2,7 +2,7 @@
 
 ## HOMER 5 SNMP Bridge
 
-Modular component for [HOMER 5](http://github.com/sipcapture/homer) providnig SNMP access to API
+Modular component for [HOMER 5](http://github.com/sipcapture/homer) and [PCAPTURE](http://pcapture.com) providing SNMP access to API Calls
 
 
 ![splitter](http://i.imgur.com/lytn4zn.png)
