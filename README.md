@@ -17,6 +17,7 @@ Modular component for [HOMER 5](http://github.com/sipcapture/homer) providnig SN
 * Configure API settings in ```config.js```
 * Start the service using ```npm start```
 * Test using ```snmpget -v 2c -c any localhost 1.3.6.1.4.1.37476.9000.25.1.0 ```
+* Run forever ```npm run forever```
 
 ### OID 
 
