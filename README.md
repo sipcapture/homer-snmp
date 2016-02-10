@@ -9,7 +9,7 @@ Modular component for [HOMER 5](http://github.com/sipcapture/homer) providnig SN
 
 ### Status
 
-* Development Stage
+* Development Stage, testers welcome onboard
 
 ### Usage
 
@@ -30,6 +30,7 @@ Sipcapture uses its reserved OID Root **1.3.6.1.4.1.37476.9000.25**
 | 1.3.6.1.4.1.37476.9000.25.3.0  | Load Avg        | OS      |
 | 1.3.6.1.4.1.37476.9000.25.4.0  | Free Memory     | OS      |
 | 1.3.6.1.4.1.37476.9000.25.5.0  | Total Memory    | OS      |
+|   |  |  |
 |   |  |  |
 | 1.3.6.1.4.1.37476.9000.25.10.0      | Stats  ROOT  | API   |
 | 1.3.6.1.4.1.37476.9000.25.10.5.1.0  | Packet Count @5m   | API   |
