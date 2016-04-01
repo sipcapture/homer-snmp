@@ -6,8 +6,8 @@
 * Official SIPCAPTURE OID: 1.3.6.1.4.1.37476.9000.25
 */ 
 
-var version = '0.1';
-var debug = true;
+var version = '0.1.1';
+var debug = false;
 
 var os = require('os');
 var snmp = require('snmpjs');
@@ -24,6 +24,10 @@ jar.add(homercookie);
 var _config_ = require("./config");
 if(process.argv.indexOf("-c") != -1){
     _config_ = require(process.argv[process.argv.indexOf("-c") + 1]);
+}
+
+if(process.argv.indexOf("-d") != -1){
+    debug = true; // set debug ON
 }
 
 var apiUrl = _config_.apiUrl;
