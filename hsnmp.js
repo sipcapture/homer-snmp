@@ -3,7 +3,7 @@
 * http://sipcapture.org
 * (c) QXIP BV
 *
-* Official SIPCAPTURE OID: 1.3.6.1.4.1.37476.9000.25
+* Official SIPCAPTURE OID: 1.3.6.1.4.1.47235.9000.25
 */ 
 
 var version = '0.1.1';
@@ -56,8 +56,8 @@ var getAuth = function(){
 	  } else {
 		if (debug) console.log(body);
 		if (JSON.parse(body).status == 200){
-			 console.log('API Auth OK');
-		} else { console.log('API Auth Failure'); process.exit(1); }
+			 if (debug) console.log('API Auth OK');
+		} else { console.log('API Auth Failure!'); process.exit(1); }
 	  }
     });
 
@@ -69,7 +69,7 @@ var prepSNMP = function(prq,body){
           try {
 		  sendSNMP(prq,JSON.parse(body).data[0].total);
 	  } catch(err) { 
-		  sendSNMP(prq,'null');
+		  sendSNMP(prq,'0');
 	  }
 }
 
@@ -96,7 +96,7 @@ var sendSNMP = function(prq,data,type){
 
 /* SYSTEM */
 
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.1', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.1', handler: function (prq) {
     var param = os.hostname();
     var val = snmp.data.createData({ type: 'OctetString',
         value: param });
@@ -104,7 +104,7 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.1', handler: function (prq) {
     snmp.provider.readOnlyScalar(prq, val);
 } });
 
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.2', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.2', handler: function (prq) {
     var param = '' + os.uptime();
     var val = snmp.data.createData({ type: 'OctetString',
         value: param });
@@ -112,7 +112,7 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.2', handler: function (prq) {
     snmp.provider.readOnlyScalar(prq, val);
 } });
 
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.3', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.3', handler: function (prq) {
     var param = '' + os.loadavg();
     var val = snmp.data.createData({ type: 'OctetString',
         value: param });
@@ -120,14 +120,14 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.3', handler: function (prq) {
     snmp.provider.readOnlyScalar(prq, val);
 } });
 
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.4', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.4', handler: function (prq) {
     var param = '' + os.freemem();
     var val = snmp.data.createData({ type: 'OctetString',
         value: param });
 
     snmp.provider.readOnlyScalar(prq, val);
 } });
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.5', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.5', handler: function (prq) {
     var param = '' + os.totalmem();
     var val = snmp.data.createData({ type: 'OctetString',
         value: param });
@@ -139,7 +139,7 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.5', handler: function (prq) {
 
 /* SIPCAPTURE STATISTICS 5min */
 
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.5.1', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.10.5.1', handler: function (prq) {
 
     var now = Date.now();
     var from = now - (5 * 60 * 1000);
@@ -156,7 +156,7 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.5.1', handler: function (prq
     });
 } });
 
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.5.2', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.10.5.2', handler: function (prq) {
 
     var now = Date.now();
     var from = now - (5 * 60 * 1000);
@@ -173,7 +173,7 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.5.2', handler: function (prq
     });
 } });
 
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.5.3', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.10.5.3', handler: function (prq) {
 
     var now = Date.now();
     var from = now - (5 * 60 * 1000);
@@ -190,7 +190,7 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.5.3', handler: function (prq
     });
 } });
 
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.5.4', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.10.5.4', handler: function (prq) {
 
     var now = Date.now();
     var from = now - (5 * 60 * 1000);
@@ -210,7 +210,7 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.5.4', handler: function (prq
 
 /* SIPCAPTURE STATISTICS 15min */
 
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.15.1', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.10.15.1', handler: function (prq) {
 
     var now = Date.now();
     var from = now - (15 * 60 * 1000);
@@ -227,7 +227,7 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.15.1', handler: function (pr
     });
 } });
 
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.15.2', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.10.15.2', handler: function (prq) {
 
     var now = Date.now();
     var from = now - (15 * 60 * 1000);
@@ -244,7 +244,7 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.15.2', handler: function (pr
     });
 } });
 
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.15.3', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.10.15.3', handler: function (prq) {
 
     var now = Date.now();
     var from = now - (15 * 60 * 1000);
@@ -261,7 +261,7 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.15.3', handler: function (pr
     });
 } });
 
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.15.4', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.10.15.4', handler: function (prq) {
 
     var now = Date.now();
     var from = now - (15 * 60 * 1000);
@@ -282,7 +282,7 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.10.15.4', handler: function (pr
 
 /* SIPCAPTURE ALARMS 5min */
 
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.11.5.1', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.11.5.1', handler: function (prq) {
 
     var now = Date.now();
     var from = now - (5 * 60 * 1000);
@@ -300,7 +300,7 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.11.5.1', handler: function (prq
 
 /* SIPCAPTURE ALARMS 15min */
 
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.11.15.1', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.11.15.1', handler: function (prq) {
 
     var now = Date.now();
     var from = now - (15 * 60 * 1000);
@@ -318,7 +318,7 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.11.15.1', handler: function (pr
 
 /* SIPCAPTURE ALARMS 30min */
 
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.11.30.1', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.11.30.1', handler: function (prq) {
 
     var now = Date.now();
     var from = now - (30 * 60 * 1000);
@@ -336,7 +336,7 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.11.30.1', handler: function (pr
 
 /* SIPCAPTURE ALARMS 60m */
 
-agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.11.60.1', handler: function (prq) {
+agent.request({ oid: '.1.3.6.1.4.1.47235.9000.25.11.60.1', handler: function (prq) {
 
     var now = Date.now();
     var from = now - (60 * 60 * 1000);
