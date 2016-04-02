@@ -33,6 +33,7 @@ if(process.argv.indexOf("-d") != -1){
 var apiUrl = _config_.apiUrl;
 var apiUser = _config_.apiUser;
 var apiPass = _config_.apiPass;
+var timeOut = _config_.timeOut ? _config_.timeOut : 120 ;
 
 /********************** 
 	FUNCTIONS 
@@ -41,7 +42,6 @@ var apiPass = _config_.apiPass;
 var getAuth = function(){
 
     var args = { username: apiUser, password: apiPass };
-
     request({
 	  uri: apiUrl+"session",
 	  method: "POST",
@@ -60,6 +60,9 @@ var getAuth = function(){
 		} else { console.log('API Auth Failure'); process.exit(1); }
 	  }
     });
+
+    return;
+
 }
 
 var prepSNMP = function(prq,body){
@@ -68,7 +71,6 @@ var prepSNMP = function(prq,body){
 	  } catch(err) { 
 		  sendSNMP(prq,'null');
 	  }
-	  if (debug) console.log(body);
 }
 
 var sendSNMP = function(prq,data,type){
@@ -357,4 +359,10 @@ agent.request({ oid: '.1.3.6.1.4.1.37476.9000.25.11.60.1', handler: function (pr
 **********************/
 
 getAuth();
+setInterval(function() {
+    getAuth();
+}, timeOut*1000 );
+
+
+
 agent.bind({ family: 'udp4', port: 161 });
