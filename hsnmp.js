@@ -86,7 +86,20 @@ var sendSNMP = function(prq,data,type){
     snmp.provider.readOnlyScalar(prq, val);
 }
 
-
+var sendSNMPtrap = function(json,oid,host){
+	if (!host) host = 'localhost';
+	var trap = snmp.message.createMessage({
+	    version: 0, //this means send a SNMP v1 trap
+	    community: "public",
+	    pdu: snmp.pdu.createPDU(json),
+	});
+	trap.encode();
+	var socket = dgram.createSocket('udp4');
+	socket.send(trap._raw.buf, 0, trap._raw.len, 162, host, function(err, bytes) {
+	    if(err) console.log(err);
+	    console.log(bytes+" bytes written");
+	});
+}
 
 /********************** 
 	OIDs 
