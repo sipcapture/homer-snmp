@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!--
+  $Id: attributes.xml 111805 2011-07-20 17:44:17Z thauser@redhat.com $
+
+  This configuration file controls the mapping of JMX mbean attributes
+  to SNMP OIDs accessible through the snmp-adapter.
+
+  For each MBean listed, you can add an oid-prefix, that will be
+  prepended to the attribute oid. If no oid-prefix is defined,
+  the attribute oid is used literally.
+-->
+<attribute-mappings>
+
+   <!-- basic system information -->
+   <mbean name="pcapture.system:type=ServerInfo" oid-prefix=".1.3.6.1.4.1.47235.7227.25.1" definition-name="pcaptureAsObjects">
+      <attribute name="ActiveThreadCount" oid=".1" snmp-type="INTEGER" max-access="read-only" description="The amount of active threads the server is handling." status="current"/>
+      <attribute name="FreeMemory" oid=".2" description="The amount of free memory on the server."/>
+      <attribute name="MaxMemory" oid=".3" description="The maximum usable amount of memory on the server."/>
+   </mbean>
+
+   <mbean name="pcapture.jmx:name=SnmpAgent,service=snmp,type=adaptor" oid-prefix=".1.3.6.1.4.1.47235.7227.25.1">
+     <attribute name="InstantiationTime" oid=".4" snmp-type="DisplayString" description="The start time of the SNMP agent."/>
+     <attribute name="TrapCount" oid=".5" snmp-type="DisplayString" description="The number of traps emitted by the agent."/>
+     <attribute name="BindAddress" oid=".6" snmp-type="DisplayString" description="The address to which the agent is bound."/>
+   </mbean>
+
+   <!-- DefaultDS statistics -->
+   <mbean name="pcapture.jca:name=DefaultDS,service=ManagedConnectionPool" oid-prefix=".1.3.6.1.4.1.47235.7227.25.1">
+      <attribute name="InUseConnectionCount" oid=".7" description="The amount of connections currently in use."/>
+      <attribute name="MaxConnectionsInUseCount" oid=".8" description="The maximum possible amount of connections available for use."/>
+   </mbean>
+
+   <!-- Tx Manager statistics -->
+   <mbean name="pcapture:service=TransactionManager">
+      <attribute name="CommitCount" oid=".1.3.6.1.4.1.47235.7227.25.1.9"/>
+      <attribute name="RollbackCount" oid=".1.3.6.1.4.1.47235.7227.25.1.10"/>
+      <attribute name="TransactionCount" oid=".1.3.6.1.4.1.47235.7227.25.1.11"/>
+   </mbean>
+
+   <mbean name="pcapture.web:type=Manager" oid-prefix=".1.3.6.1.4.1.47235.7227.25.1.12.1" table-name="metrics" description="Table containing standard metrics for any webapp deployed on pcaptureAS" status="current">
+      <attribute name="distributable" oid=".2" snmp-type="INTEGER"/>
+      <attribute name="sessionCounter" oid=".3" snmp-type="INTEGER" description="The amount of sessions this web application has handled."/>
+      <attribute name="activeSessions" oid=".4" snmp-type="INTEGER" description="The amount of currently active sessions this web application is handling."/>
+      <attribute name="maxActiveSessions" oid=".5" mode="rw" snmp-type="INTEGER" description="The maximum amount of active sessions this web application can handle at once."/>
+      <attribute name="sessionAverageAliveTime" oid=".6" snmp-type="INTEGER" description="The average time a session is active on this web application."/>
+      <attribute name="expiredSessions" oid=".7" snmp-type="INTEGER" description="The amount of expired sessions related to this web application."/>
+      <attribute name="rejectedSessions" oid=".8" snmp-type="INTEGER" description="The amount of rejected sessions related to this web application."/>
+      <attribute name="maxInactiveInterval" oid=".9" snmp-type="INTEGER" description="The amount of time that must expire before a session is considered inactive."/>
+      <attribute name="sessionMaxAliveTime" oid=".10" snmp-type="INTEGER" description="The maximum amount of time a session can remain active."/>
+   </mbean>
+
+   <mbean name="pcapture.transaction:type=Calls" oid-prefix=".1.3.6.1.4.1.47235.7227.25.1.12.2" table-name="metrics" description="Table standard metrics for calls " status="current">
+      <attribute name="srdCounter" oid=".3" snmp-type="INTEGER" description="SRD Counter"/>
+      <attribute name="sssCounter" oid=".4" snmp-type="INTEGER" description="SSS Counter"/>
+   </mbean>
+
+   <!-- system information group see RFC-1213 -->
+   <mbean name="pcapture.capture:name=SnmpAgent,service=MIB2SystemGroup" oid-prefix=".1.3.6.1.2.1.1" definition-name="system">
+      <attribute name="SysDescr" oid=".1" mode="rw" description="A description of this System."/> <!-- can be modified over snmp -->
+      <attribute name="SysObjectId" oid=".2" description="The OID Denoting this system."/>
+      <attribute name="SysUpTime" oid=".3" description="The time this system has been online."/>
+      <attribute name="SysContact" oid=".4" description="The person who is admin to this system."/>
+      <attribute name="SysName" oid=".5" description="The name this system is known by."/>
+      <attribute name="SysLocation" oid=".6" description="The physical location of this system."/>
+      <attribute name="SysServices" oid=".7" description="The services provided by this system."/>
+   </mbean>
+
+</attribute-mappings>
