@@ -12,37 +12,36 @@
 <attribute-mappings>
 
    <!-- basic system information -->
-   <mbean name="pcapture.system:type=ServerInfo" oid-prefix=".1.3.6.1.4.1.47235.100.1.1" definition-name="pcaptureAsObjects">
-      <attribute name="ActiveThreadCount" oid=".1" snmp-type="INTEGER" max-access="read-only" description="The amount of active threads the server is handling." status="current"/>
-      <attribute name="FreeMemory" oid=".2" description="The amount of free memory on the server."/>
-      <attribute name="MaxMemory" oid=".3" description="The maximum usable amount of memory on the server."/>
+   <mbean name="sipcapture.system:type=ServerInfo" oid-prefix=".1.3.6.1.4.1.47235.9000.25" definition-name="sipcapture:OS">
+      <attribute name="Hostname" oid=".1" snmp-type="DisplayString" max-access="read-only" description="Hostname of the server" />
+      <attribute name="Uptime" oid=".2"  snmp-type="INTEGER" description="Uptime of the server."/>
+      <attribute name="LoadAvg" oid=".3"  snmp-type="INTEGER" description="Load average of the server."/>
+      <attribute name="FreeMem" oid=".4"  snmp-type="INTEGER" description="Free Memory of the server."/>
+      <attribute name="TotalMem" oid=".5"  snmp-type="INTEGER" description="Total Memory of the server."/>
    </mbean>
    
-   <!-- Tx Manager statistics -->
-   <mbean name="pcapture:service=TransactionManager">
-      <attribute name="CommitCount" oid=".1.3.6.1.4.1.47235.100.1.1.9"/>
-      <attribute name="RollbackCount" oid=".1.3.6.1.4.1.47235.100.1.1.10"/>
-      <attribute name="TransactionCount" oid=".1.3.6.1.4.1.47235.100.1.1.11"/>
+   <!-- sipcapture statistics @ 5 min -->
+   <mbean name="sipcapture.core:type=Stats" oid-prefix=".1.3.6.1.4.1.47235.9000.25.10.5" definition-name="sipcapture:CORE">
+      <attribute name="packetCount5m" oid=".1" snmp-type="INTEGER" description="Packet Count @5m"/>
+      <attribute name="packetSize5m" oid=".2" snmp-type="INTEGER" description="Packet Size @5m"/>
+      <attribute name="asr5m" oid=".3" snmp-type="INTEGER" description="ASR @5m"/>
+      <attribute name="ner5m" oid=".4" snmp-type="INTEGER" description="NER @5m"/>
    </mbean>
-
-   <mbean name="pcapture.transaction:type=Calls" oid-prefix=".1.3.6.1.4.1.47235.100.1.10.1" definition-name="pcaptureAsCallsMetrics">
-      <attribute name="srdStartTime" oid=".4" snmp-type="INTEGER" description="SRD Report Time"/>
-      <attribute name="srdCounter" oid=".5" snmp-type="INTEGER" description="SRD Counter"/>
-      <attribute name="srdMessage" oid=".1000" snmp-type="DisplayString" description="messsage for SRD"/>
-      <attribute name="sssStartTime" oid=".14" snmp-type="INTEGER" description="SSS Report Time"/>
-      <attribute name="sssCounter" oid=".15" snmp-type="INTEGER" description="SSS Counter"/>
-      <attribute name="sssMessage" oid=".1010" snmp-type="DisplayString" description="messsage for SSS"/>
+   
+   <!-- sipcapture statistics @ 15 min -->
+   <mbean name="sipcapture.core:type=Stats" oid-prefix=".1.3.6.1.4.1.47235.9000.25.10.15" definition-name="sipcapture:CORE">
+      <attribute name="packetCount15m" oid=".1" snmp-type="INTEGER" description="Packet Count @15m"/>
+      <attribute name="packetSize15m" oid=".2" snmp-type="INTEGER" description="Packet Size @15m"/>
+      <attribute name="asr15m" oid=".3" snmp-type="INTEGER" description="ASR @15m"/>
+      <attribute name="ner15m" oid=".4" snmp-type="INTEGER" description="NER @15m"/>
    </mbean>
-
- <!-- system information group see RFC-1213 -->
-   <mbean name="pcapture.capture:name=SnmpAgent,service=MIB2SystemGroup" oid-prefix=".1.3.6.1.2.1.1" definition-name="system">
-      <attribute name="SysDescr" oid=".1" mode="rw" description="A description of this System."/> <!-- can be modified over snmp -->
-      <attribute name="SysObjectId" oid=".2" description="The OID Denoting this system."/>
-      <attribute name="SysUpTime" oid=".3" description="The time this system has been online."/>
-      <attribute name="SysContact" oid=".4" description="The person who is admin to this system."/>
-      <attribute name="SysName" oid=".5" description="The name this system is known by."/>
-      <attribute name="SysLocation" oid=".6" description="The physical location of this system."/>
-      <attribute name="SysServices" oid=".7" description="The services provided by this system."/>
+   
+   <!-- sipcapture alarms -->
+   <mbean name="sipcapture.core:type=Alarms" oid-prefix=".1.3.6.1.4.1.47235.9000.25.11" definition-name="sipcapture:ALARMS">
+      <attribute name="alarms5m" oid=".5" snmp-type="INTEGER" description="Alarms @5m"/>
+      <attribute name="alarms15m" oid=".15" snmp-type="INTEGER" description="Alarms @15m"/>
+      <attribute name="alarms30m" oid=".30" snmp-type="INTEGER" description="Alarms @30m"/>
+      <attribute name="alarms60m" oid=".60" snmp-type="INTEGER" description="Alarms @60m"/>
    </mbean>
 
 </attribute-mappings>
