@@ -22,13 +22,10 @@
 -->
 <notification-map-list>
 
-  <mapping name="sipcaptureAsCallMetricNotification" notification-type="jboss.snmp.agent.heartbeat" generic="0" specific="3" enterprise=".1.3.6.1.4.1.47235.100.1.2" definition-name="CallsMetricAsTraps">
-    
+  <mapping name="sipcapture.core:type=Alarms" notification-type="jboss.snmp.agent.heartbeat" generic="0" specific="3" enterprise=".1.3.6.1.4.1.47235.9000" definition-name="sipcapture:ALARMS">    
     <var-bind-list wrapper-class="org.jboss.jmx.adaptor.snmp.agent.NotificationWrapperSupport">
-     	 <var-bind tag="a:alarms5m" oid=".1.3.6.1.4.1.47235.9000.25.11.5" definition-name="Alarms @5m"/>
-     	 <var-bind tag="a:alarms15m" oid=".1.3.6.1.4.1.47235.9000.25.11.15" definition-name="Alarms @15m"/>
-     	 <var-bind tag="a:alarms30m" oid=".1.3.6.1.4.1.47235.9000.25.11.30" definition-name="Alarms @30m"/>
-     	 <var-bind tag="a:alarms60m" oid=".1.3.6.1.4.1.47235.9000.25.11.60" definition-name="Alarms @60m"/>
+<!--     	 <var-bind tag="a:alarms5m" oid=".1.3.6.1.4.1.47235.9000.25.11.5" definition-name="Alarms @5m"/> -->
     </var-bind-list>
+  </mapping>
 
 </notification-map-list>
