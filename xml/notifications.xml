@@ -22,19 +22,13 @@
 -->
 <notification-map-list>
 
-  <mapping name="pcaptureAsCallMetricNotification" notification-type="jboss.snmp.agent.heartbeat" generic="0" specific="3" enterprise=".1.3.6.1.4.1.47235.100.1.2" definition-name="CallsMetricAsTraps">
+  <mapping name="sipcaptureAsCallMetricNotification" notification-type="jboss.snmp.agent.heartbeat" generic="0" specific="3" enterprise=".1.3.6.1.4.1.47235.100.1.2" definition-name="CallsMetricAsTraps">
     
     <var-bind-list wrapper-class="org.jboss.jmx.adaptor.snmp.agent.NotificationWrapperSupport">
-     	 <var-bind tag="a:srdStartTime" oid="1.3.6.1.4.1.47235.100.1.10.1.4" definition-name="srd Start time"/>
-     	 <var-bind tag="a:srdTrapCount" oid="1.3.6.1.4.1.47235.100.1.10.1.5" definition-name="srd trap Count"/>
-     	 <var-bind tag="a:srdMessage" oid="1.3.6.1.4.1.47235.100.1.10.1.1000" definition-name="viewChangedMessage"/>
+     	 <var-bind tag="a:alarms5m" oid=".1.3.6.1.4.1.47235.9000.25.11.5" definition-name="Alarms @5m"/>
+     	 <var-bind tag="a:alarms15m" oid=".1.3.6.1.4.1.47235.9000.25.11.15" definition-name="Alarms @15m"/>
+     	 <var-bind tag="a:alarms30m" oid=".1.3.6.1.4.1.47235.9000.25.11.30" definition-name="Alarms @30m"/>
+     	 <var-bind tag="a:alarms60m" oid=".1.3.6.1.4.1.47235.9000.25.11.60" definition-name="Alarms @60m"/>
     </var-bind-list>
-
-   <var-bind-list wrapper-class="org.jboss.jmx.adaptor.snmp.agent.NotificationWrapperSupport">
-     	 <var-bind tag="a:sssStartTime" oid="1.3.6.1.4.1.47235.100.1.10.1.14" definition-name="sss Start time"/>
-    	  <var-bind tag="a:sssTrapCount" oid="1.3.6.1.4.1.47235.100.1.10.1.15" definition-name="sss trap Count"/>
-     	 <var-bind tag="a:sssMessage" oid="1.3.6.1.4.1.47235.100.1.10.1.1010" definition-name="viewChangedMessage"/>
-    </var-bind-list>
-  </mapping>
 
 </notification-map-list>
