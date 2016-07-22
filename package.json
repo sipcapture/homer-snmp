@@ -4,6 +4,7 @@
   "author": "lorenzo.mangani@gmail.com",
   "dependencies": {
     "snmpjs": "*",
+    "request": "*",
     "node-rest-client": "*"
   },
   "scripts": {
