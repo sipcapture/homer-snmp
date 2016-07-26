@@ -15,7 +15,6 @@ var agent = snmp.createAgent();
 var request = require('request');
 var jar = request.jar();
 var homercookie = request.cookie("HOMERSESSID="+Math.random().toString(36).slice(2)+"; path=/");
-jar.setCookie(homercookie, 'http://localhost/api/v1', function(error, cookie) {});
 
 /********************** 
 	OPTIONS 
@@ -38,7 +37,7 @@ var timeOut = _config_.timeOut ? _config_.timeOut : 120 ;
 /********************** 
 	FUNCTIONS 
 **********************/
-
+jar.setCookie(homercookie, 'apiUrl', function(error, cookie) {});
 var getAuth = function(){
 
     var args = { username: apiUser, password: apiPass };
