@@ -15,7 +15,7 @@ var agent = snmp.createAgent();
 var request = require('request');
 var jar = request.jar();
 var homercookie = request.cookie("HOMERSESSID="+Math.random().toString(36).slice(2)+"; path=/");
-jar.add(homercookie);
+jar.setCookie(homercookie, 'http://localhomst/api/v1', function(error, cookie) {});
 
 /********************** 
 	OPTIONS 
