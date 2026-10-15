@@ -12,7 +12,7 @@ var debug = false;
 var os = require('os');
 var snmp = require('snmpjs');
 var agent = snmp.createAgent();
-var request = require('request');
+var request = require('@cypress/request');
 var jar = request.jar();
 var homercookie = request.cookie("HOMERSESSID="+Math.random().toString(36).slice(2)+"; path=/");
 jar.add(homercookie);
